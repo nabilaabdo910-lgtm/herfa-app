@@ -93,4 +93,192 @@
                 </div>
                 <div>
                     <label class="block text-xs font-medium mb-1">كلمة المرور</label>
-                    <input type="password" id="regPassword" required minlength="6" class="w-full border border
+                    <input type="password" id="regPassword" required minlength="6" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen" placeholder="6 أحرف على الأقل">
+                </div>
+                
+                <!-- أزرار اختيار نوع الحساب التفاعلية الواضحة -->
+                <div>
+                    <label class="block text-xs font-medium mb-2 text-brandDarkGreen font-bold">اختاري نوع الحساب:</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <button type="button" onclick="selectRole('customer', this)" class="role-btn p-2.5 border-2 border-brandDarkGreen bg-brandDarkGreen text-white rounded-xl font-medium text-center transition">عميل (شراء)</button>
+                        <button type="button" onclick="selectRole('craftsman', this)" class="role-btn p-2.5 border-2 border-gray-300 text-gray-700 rounded-xl font-medium text-center transition">حرفي / ورشة</button>
+                        <button type="button" onclick="selectRole('supplier', this)" class="role-btn p-2.5 border-2 border-gray-300 text-gray-700 rounded-xl font-medium text-center transition">مورد خامات</button>
+                        <button type="button" onclick="selectRole('shipping', this)" class="role-btn p-2.5 border-2 border-gray-300 text-gray-700 rounded-xl font-medium text-center transition">شركة شحن</button>
+                    </div>
+                    <input type="hidden" id="selectedRole" value="customer">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium mb-1">المحافظة</label>
+                    <select id="regGov" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen">
+                        <option value="القاهرة">القاهرة</option>
+                        <option value="الجيزة">الجيزة</option>
+                        <option value="الإسكندرية">الإسكندرية</option>
+                        <option value="الشرقية">الشرقية</option>
+                        <option value="الدقهلية">الدقهلية</option>
+                        <option value="محافظة أخرى">محافظة أخرى</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">إلغاء</button>
+                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brandLightGreen transition">إنشاء الحساب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة استعادة كلمة المرور -->
+    <div id="forgotModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 p-4">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">
+            <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">استعادة كلمة المرور</h3>
+            <p class="text-xs text-gray-600 mb-4">أدخلي بريدك الإلكتروني وسنرسل لكِ رابطاً لإعادة تعيين كلمة المرور.</p>
+            <form onsubmit="handleForgotPassword(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium mb-1">البريد الإلكتروني</label>
+                    <input type="email" id="forgotEmail" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brandDarkGreen">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('forgotModal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">إلغاء</button>
+                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brandLightGreen transition">إرسال رابط الاستعادة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="bg-brandDarkGreen text-white py-6 text-center text-xs mt-auto">
+        <p>© 2026 منصة حِرفة HERFA - جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- السكريبت البرمجي -->
+    <script>
+        const SUPABASE_URL = 'https://einfthdzxglylumqpxss.supabase.co';
+        const SUPABASE_KEY = 'Sb_publishable_1YokFOqSMSzCKV36TGsZjQ_cy9pRaxE';
+        
+        const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        function openModal(id) {
+            document.querySelectorAll('.fixed').forEach(m => {
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+            });
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function switchModal(closeId, openId) {
+            closeModal(closeId);
+            openModal(openId);
+        }
+
+        function selectRole(role, btnElement) {
+            document.getElementById('selectedRole').value = role;
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('border-brandDarkGreen', 'bg-brandDarkGreen', 'text-white');
+                btn.classList.add('border-gray-300', 'text-gray-700');
+            });
+            btnElement.classList.remove('border-gray-300', 'text-gray-700');
+            btnElement.classList.add('border-brandDarkGreen', 'bg-brandDarkGreen', 'text-white');
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const fullName = document.getElementById('regFullName').value.trim();
+            const role = document.getElementById('selectedRole').value;
+            const governorate = document.getElementById('regGov').value;
+
+            try {
+                const { data, error } = await _supabase.auth.signUp({ email, password });
+                if (error) throw error;
+
+                if (data.user) {
+                    const { error: profileError } = await _supabase.from('profiles').insert([
+                        {
+                            id: data.user.id,
+                            full_name: fullName,
+                            role: role,
+                            governorate: governorate
+                        }
+                    ]);
+                    if (profileError) console.warn("ملاحظة حفظ الملف الشخصي:", profileError.message);
+
+                    alert("تم إنشاء الحساب بنجاح!");
+                    closeModal('registerModal');
+                }
+            } catch (err) {
+                alert("خطأ أثناء إنشاء الحساب: " + err.message);
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const { error } = await _supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+
+                alert("تم تسجيل الدخول بنجاح!");
+                closeModal('loginModal');
+                checkUser();
+            } catch (err) {
+                alert("خطأ في بيانات الدخول: " + err.message);
+            }
+        }
+
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value.trim();
+
+            try {
+                const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin
+                });
+                if (error) throw error;
+
+                alert("تم إرسال تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني.");
+                closeModal('forgotModal');
+            } catch (err) {
+                alert("حدث خطأ: " + err.message);
+            }
+        }
+
+        async function checkUser() {
+            try {
+                const { data: { user } } = await _supabase.auth.getUser();
+                if (user) {
+                    document.getElementById('authButtons').classList.add('hidden');
+                    document.getElementById('userInfo').classList.remove('hidden');
+                    document.getElementById('userName').textContent = user.email;
+                } else {
+                    document.getElementById('authButtons').classList.remove('hidden');
+                    document.getElementById('userInfo').classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function logout() {
+            await _supabase.auth.signOut();
+            checkUser();
+        }
+
+        window.onload = checkUser;
+    </script>
+</body>
+</html>
