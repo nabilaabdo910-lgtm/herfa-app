@@ -96,7 +96,8 @@
                     <select id="regRole" class="w-full border border-gray-300 rounded-lg p-2 text-sm">
                         <option value="customer">عميل</option>
                         <option value="craftsman">حرفي / صاحب ورشة</option>
-                        <option value="supplier">مورد خامات</option>
+                        <option value="supplier">مورد خامات ومستلزمات</option>
+                        <option value="shipping">شركة شحن وتوصيل</option>
                     </select>
                 </div>
                 <div class="flex justify-end gap-2 pt-3">
@@ -116,73 +117,4 @@
 
         function openModal(id) {
             document.getElementById(id).classList.remove('hidden');
-            document.getElementById(id).classList.add('flex');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-            document.getElementById(id).classList.remove('flex');
-        }
-
-        async function handleRegister(e) {
-            e.preventDefault();
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
-            const fullName = document.getElementById('regFullName').value;
-            const role = document.getElementById('regRole').value;
-
-            try {
-                const { data, error } = await _supabase.auth.signUp({ email, password });
-                if (error) throw error;
-
-                if (data.user) {
-                    await _supabase.from('profiles').insert([{
-                        id: data.user.id,
-                        full_name: fullName,
-                        role: role
-                    }]);
-                    alert("تم إنشاء الحساب بنجاح!");
-                    closeModal('registerModal');
-                }
-            } catch (err) {
-                alert("خطأ في التسجيل: " + err.message);
-            }
-        }
-
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            try {
-                const { error } = await _supabase.auth.signInWithPassword({ email, password });
-                if (error) throw error;
-                alert("تم تسجيل الدخول بنجاح!");
-                closeModal('loginModal');
-                checkUser();
-            } catch (err) {
-                alert("خطأ في الدخول: " + err.message);
-            }
-        }
-
-        async function checkUser() {
-            const { data: { user } } = await _supabase.auth.getUser();
-            if (user) {
-                document.getElementById('authButtons').classList.add('hidden');
-                document.getElementById('userInfo').classList.remove('hidden');
-                document.getElementById('userName').textContent = user.email;
-            } else {
-                document.getElementById('authButtons').classList.remove('hidden');
-                document.getElementById('userInfo').classList.add('hidden');
-            }
-        }
-
-        async function logout() {
-            await _supabase.auth.signOut();
-            checkUser();
-        }
-
-        window.onload = checkUser;
-    </script>
-</body>
-</html>
+            document.
