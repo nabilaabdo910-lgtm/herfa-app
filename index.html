@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة حِرفة - HERFA</title>
+    <title>منصة حِرفة - HERFA | من إيدك للسوق</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Supabase JS Client -->
@@ -30,85 +30,123 @@
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-xl font-bold">حِرفة <span class="text-brandAccent text-xs font-normal">HERFA</span></h1>
+                <p class="text-[10px] text-gray-300">من إيدك للسوق ومن فكرتك لمشروع</p>
             </div>
             <div id="authButtons" class="flex gap-2">
-                <button type="button" onclick="openModal('loginModal')" class="bg-brandAccent text-brandDarkGreen px-3 py-1.5 rounded-lg text-xs font-semibold">دخول</button>
-                <button type="button" onclick="openModal('registerModal')" class="bg-white text-brandDarkGreen px-3 py-1.5 rounded-lg text-xs font-semibold">حساب جديد</button>
+                <button type="button" onclick="openModal('loginModal')" class="bg-brandAccent text-brandDarkGreen px-3 py-1.5 rounded-lg text-xs font-semibold hover:opacity-90 transition">دخول</button>
+                <button type="button" onclick="openModal('registerModal')" class="bg-white text-brandDarkGreen px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-gray-100 transition">حساب جديد</button>
             </div>
             <div id="userInfo" class="hidden flex items-center gap-2">
                 <span id="userName" class="text-xs font-medium"></span>
-                <button type="button" onclick="logout()" class="bg-red-600 text-white px-2 py-1 rounded text-xs">خروج</button>
+                <button type="button" onclick="logout()" class="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700 transition">خروج</button>
             </div>
         </div>
     </header>
 
     <!-- المحتوى الرئيسي -->
-    <main class="container mx-auto px-4 py-8 flex-grow">
-        <div class="text-center py-12">
-            <h2 class="text-2xl font-bold text-brandDarkGreen mb-3">مرحباً بكِ في منصة حِرفة المصرية</h2>
-            <p class="text-sm text-gray-600 mb-6">سوق الحرف اليدوية والخامات الأول</p>
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <div class="text-center max-w-xl mx-auto py-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-brandDarkGreen mb-3">السوق المصري المتكامل للحرف اليدوية والخامات</h2>
+            <p class="text-sm text-gray-600 mb-6">منصة تجمع الحرفيين، الموردين، العملاء، وشركات الشحن في مكان واحد.</p>
             <div class="flex justify-center gap-3">
-                <button type="button" onclick="openModal('registerModal')" class="bg-brandDarkGreen text-white px-5 py-2.5 rounded-xl text-sm font-bold">انضمي إلينا الآن</button>
+                <button type="button" onclick="openModal('registerModal')" class="bg-brandDarkGreen text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-sm hover:bg-brandLightGreen transition">انضمي إلينا الآن</button>
             </div>
         </div>
     </main>
 
     <!-- نافذة تسجيل الدخول -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-6 w-full max-w-md">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">
             <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">تسجيل الدخول</h3>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium mb-1">البريد الإلكتروني</label>
-                    <input type="email" id="loginEmail" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                    <input type="email" id="loginEmail" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brandDarkGreen">
                 </div>
                 <div>
                     <label class="block text-xs font-medium mb-1">كلمة المرور</label>
-                    <input type="password" id="loginPassword" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                    <input type="password" id="loginPassword" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brandDarkGreen">
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <button type="button" onclick="switchModal('loginModal', 'forgotModal')" class="text-brandLightGreen hover:underline">نسيت كلمة المرور؟</button>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('loginModal')" class="px-4 py-2 text-sm text-gray-600">إلغاء</button>
-                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold">دخول</button>
+                    <button type="button" onclick="closeModal('loginModal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">إلغاء</button>
+                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brandLightGreen transition">دخول</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- نافذة حساب جديد -->
+    <!-- نافذة إنشاء حساب جديد -->
     <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">إنشاء حساب جديد</h3>
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto shadow-lg">
+            <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">إنشاء حساب جديد في حِرفة</h3>
             <form onsubmit="handleRegister(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs font-medium mb-1">الاسم الكامل</label>
-                    <input type="text" id="regFullName" required class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                    <input type="text" id="regFullName" required class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen">
                 </div>
                 <div>
                     <label class="block text-xs font-medium mb-1">البريد الإلكتروني</label>
-                    <input type="email" id="regEmail" required class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                    <input type="email" id="regEmail" required class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen">
                 </div>
                 <div>
                     <label class="block text-xs font-medium mb-1">كلمة المرور</label>
-                    <input type="password" id="regPassword" required class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                    <input type="password" id="regPassword" required minlength="6" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen" placeholder="6 أحرف على الأقل">
                 </div>
                 <div>
                     <label class="block text-xs font-medium mb-1">نوع الحساب</label>
-                    <select id="regRole" class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        <option value="customer">عميل</option>
-                        <option value="craftsman">حرفي / صاحب ورشة</option>
+                    <select id="regRole" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen">
+                        <option value="customer">عميل (أريد الشراء)</option>
+                        <option value="craftsman">حرفي / صاحب ورشة (أصنع وأبيع)</option>
                         <option value="supplier">مورد خامات ومستلزمات</option>
                         <option value="shipping">شركة شحن وتوصيل</option>
                     </select>
                 </div>
+                <div>
+                    <label class="block text-xs font-medium mb-1">المحافظة</label>
+                    <select id="regGov" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen">
+                        <option value="القاهرة">القاهرة</option>
+                        <option value="الجيزة">الجيزة</option>
+                        <option value="الإسكندرية">الإسكندرية</option>
+                        <option value="الشرقية">الشرقية</option>
+                        <option value="الدقهلية">الدقهلية</option>
+                        <option value="محافظة أخرى">محافظة أخرى</option>
+                    </select>
+                </div>
                 <div class="flex justify-end gap-2 pt-3">
-                    <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 text-sm text-gray-600">إلغاء</button>
-                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold">تسجيل</button>
+                    <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">إلغاء</button>
+                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brandLightGreen transition">إنشاء الحساب</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- السكريبت البرمجي -->
+    <!-- نافذة استعادة كلمة المرور -->
+    <div id="forgotModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 p-4">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">
+            <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">استعادة كلمة المرور</h3>
+            <p class="text-xs text-gray-600 mb-4">أدخلي بريدك الإلكتروني وسنرسل لكِ رابطاً لإعادة تعيين كلمة المرور.</p>
+            <form onsubmit="handleForgotPassword(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium mb-1">البريد الإلكتروني</label>
+                    <input type="email" id="forgotEmail" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brandDarkGreen">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('forgotModal')" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">إلغاء</button>
+                    <button type="submit" class="bg-brandDarkGreen text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brandLightGreen transition">إرسال رابط الاستعادة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="bg-brandDarkGreen text-white py-6 text-center text-xs mt-auto">
+        <p>© 2026 منصة حِرفة HERFA - جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- السكريبت البرمجي المحدث والآمن -->
     <script>
         const SUPABASE_URL = 'https://einfthdzxglylumqpxss.supabase.co';
         const SUPABASE_KEY = 'Sb_publishable_1YokFOqSMSzCKV36TGsZjQ_cy9pRaxE';
@@ -116,5 +154,117 @@
         const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-            document.
+            document.querySelectorAll('.fixed').forEach(m => {
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+            });
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function switchModal(closeId, openId) {
+            closeModal(closeId);
+            openModal(openId);
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const fullName = document.getElementById('regFullName').value.trim();
+            const role = document.getElementById('regRole').value;
+            const governorate = document.getElementById('regGov').value;
+
+            try {
+                const { data, error } = await _supabase.auth.signUp({ email, password });
+                if (error) throw error;
+
+                if (data.user) {
+                    const { error: profileError } = await _supabase.from('profiles').insert([
+                        {
+                            id: data.user.id,
+                            full_name: fullName,
+                            role: role,
+                            governorate: governorate
+                        }
+                    ]);
+                    if (profileError) console.warn("ملاحظة حفظ الملف الشخصي:", profileError.message);
+
+                    alert("تم إنشاء الحساب بنجاح!");
+                    closeModal('registerModal');
+                }
+            } catch (err) {
+                alert("خطأ أثناء إنشاء الحساب: " + err.message);
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const { error } = await _supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+
+                alert("تم تسجيل الدخول بنجاح!");
+                closeModal('loginModal');
+                checkUser();
+            } catch (err) {
+                alert("خطأ في بيانات الدخول: " + err.message);
+            }
+        }
+
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value.trim();
+
+            try {
+                const { error } = await _supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin
+                });
+                if (error) throw error;
+
+                alert("تم إرسال تعليمات استعادة كلمة المرور إلى بريدك الإلكتروني.");
+                closeModal('forgotModal');
+            } catch (err) {
+                alert("حدث خطأ: " + err.message);
+            }
+        }
+
+        async function checkUser() {
+            try {
+                const { data: { user } } = await _supabase.auth.getUser();
+                if (user) {
+                    document.getElementById('authButtons').classList.add('hidden');
+                    document.getElementById('userInfo').classList.remove('hidden');
+                    document.getElementById('userName').textContent = user.email;
+                } else {
+                    document.getElementById('authButtons').classList.remove('hidden');
+                    document.getElementById('userInfo').classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function logout() {
+            await _supabase.auth.signOut();
+            checkUser();
+        }
+
+        window.onload = checkUser;
+    </script>
+</body>
+</html>
