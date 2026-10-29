@@ -155,7 +155,10 @@
         const SUPABASE_URL = 'https://einfthdzxglylumqpxss.supabase.co';
         const SUPABASE_KEY = 'Sb_publishable_1YokFOqSMSzCKV36TGsZjQ_cy9pRaxE';
         
-        const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // التهيئة الصحيحة لمفتاح Supabase المباشر
+        const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+            auth: { persistSession: true }
+        });
 
         function openModal(id) {
             document.querySelectorAll('.fixed').forEach(m => {
@@ -201,22 +204,37 @@
             const governorate = document.getElementById('regGov').value;
 
             try {
-                const { data, error } = await _supabase.auth.signUp({ email, password });
-                if (error) throw error;
-
-                if (data.user) {
-                    const { error: profileError } = await _supabase.from('profiles').insert([
-                        {
-                            id: data.user.id,
+                const { data, error } = await _supabase.auth.signUp({ 
+                    email, 
+                    password,
+                    options: {
+                        data: {
                             full_name: fullName,
                             role: role,
                             governorate: governorate
                         }
-                    ]);
-                    if (profileError) console.warn("ملاحظة حفظ الملف الشخصي:", profileError.message);
+                    }
+                });
+
+                if (error) throw error;
+
+                if (data.user) {
+                    try {
+                        await _supabase.from('profiles').insert([
+                            {
+                                id: data.user.id,
+                                full_name: fullName,
+                                role: role,
+                                governorate: governorate
+                            }
+                        ]);
+                    } catch (pErr) {
+                        console.log("Profile notice:", pErr);
+                    }
 
                     alert("تم إنشاء الحساب بنجاح!");
                     closeModal('registerModal');
+                    checkUser();
                 }
             } catch (err) {
                 alert("خطأ أثناء إنشاء الحساب: " + err.message);
