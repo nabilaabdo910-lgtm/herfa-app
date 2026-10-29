@@ -43,10 +43,10 @@
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي (الصفحة العامة أو لوحة التحكم حسب حالة تسجيل الدخول) -->
+    <!-- المحتوى الرئيسي -->
     <main class="container mx-auto px-4 py-8 flex-grow">
         
-        <!-- القسم العام (يظهر للمطور غير المسجل) -->
+        <!-- القسم العام -->
         <div id="publicHero" class="text-center max-w-xl mx-auto py-12">
             <h2 class="text-2xl md:text-3xl font-bold text-brandDarkGreen mb-3">السوق المصري المتكامل للحرف اليدوية والخامات</h2>
             <p class="text-sm text-gray-600 mb-6">منصة تجمع الحرفيين، الموردين، العملاء، وشركات الشحن في مكان واحد.</p>
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <!-- لوحة تحكم الحرفي (تظهر فقط للحرفي عند تسجيل الدخول) -->
+        <!-- لوحة تحكم الحرفي -->
         <div id="craftsmanDashboard" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>
@@ -69,7 +69,6 @@
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
                 <h3 class="text-sm font-bold text-brandDarkGreen mb-4">منتجاتي المعروضة</h3>
                 <div id="productsList" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- يتم تعبئتها ديناميكياً -->
                     <p class="text-xs text-gray-400 col-span-full text-center py-6">جاري تحميل منتجاتك...</p>
                 </div>
             </div>
@@ -77,7 +76,7 @@
 
     </main>
 
-    <!-- نافذة إضافة منتج جديد (خاصة بالحرفي) -->
+    <!-- نافذة إضافة منتج جديد -->
     <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 p-4">
         <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">
             <h3 class="text-lg font-bold mb-4 text-brandDarkGreen">إضافة منتج يدوي جديد</h3>
@@ -144,7 +143,7 @@
                     <input type="password" id="regPassword" required minlength="6" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:border-brandDarkGreen" placeholder="6 أحرف على الأقل">
                 </div>
                 
-                <!-- أزرار اختيار نوع الحساب التفاعلية الواضحة -->
+                <!-- أزرار اختيار نوع الحساب -->
                 <div>
                     <label class="block text-xs font-medium mb-2 text-brandDarkGreen font-bold">اختاري نوع الحساب:</label>
                     <div class="grid grid-cols-2 gap-2 text-xs">
@@ -201,7 +200,7 @@
     <!-- السكريبت البرمجي -->
     <script>
         const SUPABASE_URL = 'https://einfthdzxglylumqpxss.supabase.co';
-        const SUPABASE_KEY = 'Sb_publishable_1YokFOqSMSzCKV36TGsZjQ_cy9pRaxE';
+        const SUPABASE_KEY = 'EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvd3ppaGh0cnlrb3FlbXZwcmp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDY1NjAsImV4cCI6MjEwODE4MjU2MH0.VdON_0z96Rj-YC3IqFzoSTHlthkj7lBcanaz_c3tpqM';
         
         const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
             auth: { persistSession: true }
@@ -321,7 +320,6 @@
                     document.getElementById('userInfo').classList.remove('hidden');
                     document.getElementById('userName').textContent = user.email;
 
-                    // جلب دور المستخدم من جدول profiles
                     const { data: profile } = await _supabase
                         .from('profiles')
                         .select('role')
