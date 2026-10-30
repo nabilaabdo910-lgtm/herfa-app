@@ -11,9 +11,7 @@
     <!-- Google Fonts (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-        }
+        body { font-family: 'Tajawal', sans-serif; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
@@ -37,40 +35,16 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-12 flex-grow w-full">
-        <!-- Hero Section -->
-        <section class="text-center py-12">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
-                منصة <span class="text-amber-500">حِرفة</span> لإدارة وتوصيل الأعمال الحرفية
-            </h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8">
-                الملتقى المتكامل للعملاء، الحرفيين، موردي المواد الخام، وشركات الشحن في مكان واحد.
-            </p>
-        </section>
-
-        <!-- Role Sections Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-            <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl hover:border-amber-500/40 transition">
-                <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">👤</div>
-                <h3 class="text-xl font-bold mb-2">العملاء</h3>
-                <p class="text-slate-400 text-sm">تصفح المنتجات اليدوية واطلب خدمات التفصيل الخاصة بسهولة.</p>
-            </div>
-            <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl hover:border-amber-500/40 transition">
-                <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">🛠️</div>
-                <h3 class="text-xl font-bold mb-2">الحرفيون</h3>
-                <p class="text-slate-400 text-sm">اعرض إبداعاتك، واطلب المواد الخام، وأدر طلبات عملائك.</p>
-            </div>
-            <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl hover:border-amber-500/40 transition">
-                <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">📦</div>
-                <h3 class="text-xl font-bold mb-2">موردو المواد الخام</h3>
-                <p class="text-slate-400 text-sm">وفر المستلزمات والأدوات الأساسية للحرفيين بأسعار تنافسية.</p>
-            </div>
-            <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl hover:border-amber-500/40 transition">
-                <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">🚚</div>
-                <h3 class="text-xl font-bold mb-2">شركات الشحن</h3>
-                <p class="text-slate-400 text-sm">توصيل آمن وسريع للطلبات بين الموردين، الحرفيين، والعملاء.</p>
-            </div>
-        </div>
+    <main class="max-w-7xl mx-auto px-4 py-12 flex-grow w-full text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
+            منصة <span class="text-amber-500">حِرفة</span> لإدارة وتوصيل الأعمال الحرفية
+        </h1>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8">
+            الملتقى المتكامل للعملاء، الحرفيين، موردي المواد الخام، وشركات الشحن.
+        </p>
+        <button onclick="openModal('register')" class="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-2xl text-lg shadow-xl shadow-amber-500/20 transition">
+            ابدأ الانضمام لمنصة حِرفة
+        </button>
     </main>
 
     <!-- Footer -->
@@ -94,7 +68,7 @@
                     <label class="block text-sm font-medium text-slate-300 mb-1">كلمة المرور</label>
                     <input type="password" id="loginPassword" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-500" placeholder="••••••••">
                 </div>
-                <button onclick="handleLogin()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/20">دخول</button>
+                <button onclick="handleLogin()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition">دخول</button>
                 <p class="text-xs text-center text-slate-400 mt-4">ليس لديك حساب؟ <button onclick="switchTab('register')" class="text-amber-400 underline">إنشاء حساب جديد</button></p>
             </div>
 
@@ -122,7 +96,7 @@
                         <option value="shipping">شركة شحن</option>
                     </select>
                 </div>
-                <button onclick="handleRegister()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/20">إنشاء الحساب</button>
+                <button onclick="handleRegister()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition">إنشاء الحساب</button>
                 <p class="text-xs text-center text-slate-400 mt-4">لديك حساب بالفعل؟ <button onclick="switchTab('login')" class="text-amber-400 underline">تسجيل الدخول</button></p>
             </div>
         </div>
@@ -130,13 +104,18 @@
 
     <!-- Script Logic -->
     <script>
-        // Supabase Initialization
         const SUPABASE_URL = "https://bowzzihtrykoemvprjw.supabase.co";
         const SUPABASE_ANON_KEY = "Sb_publishable_1YokFOqSMSzCKV36TGsZjQ_cy9pRaxE";
         
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // إعداد العميل مع ضبط الاتصال لتفادي مشاكل الحظر
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: false
+            }
+        });
 
-        // UI Functions
         function openModal(type) {
             document.getElementById('authModal').classList.remove('hidden');
             switchTab(type);
@@ -156,15 +135,14 @@
             }
         }
 
-        // Auth Logic
         async function handleRegister() {
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
             const role = document.getElementById('regRole').value;
 
             if(!email || !password || !name) {
-                alert("برجاء إدخال جميع البيانات المطلوب");
+                alert("برجاء إدخال جميع البيانات المطلوبة");
                 return;
             }
 
@@ -173,10 +151,7 @@
                     email: email,
                     password: password,
                     options: {
-                        data: {
-                            full_name: name,
-                            role: role
-                        }
+                        data: { full_name: name, role: role }
                     }
                 });
 
@@ -186,13 +161,13 @@
                 closeModal();
                 checkUser();
             } catch (err) {
-                alert("خطأ أثناء إنشاء الحساب: " + err.message);
+                alert("خطأ في الاتصال أو إنشاء الحساب: " + (err.message || "تأكد من الانترنت"));
             }
         }
 
         async function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
 
             try {
                 const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -216,18 +191,21 @@
         }
 
         async function checkUser() {
-            const { data: { user } } = await supabaseClient.auth.getUser();
-            if (user) {
-                document.getElementById('authButtons').classList.add('hidden');
-                document.getElementById('userMenu').classList.remove('hidden');
-                document.getElementById('userNameDisplay').innerText = `أهلاً، ${user.user_metadata.full_name || user.email}`;
-            } else {
-                document.getElementById('authButtons').classList.remove('hidden');
-                document.getElementById('userMenu').classList.add('hidden');
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (user) {
+                    document.getElementById('authButtons').classList.add('hidden');
+                    document.getElementById('userMenu').classList.remove('hidden');
+                    document.getElementById('userNameDisplay`').innerText = `أهلاً، ${user.user_metadata?.full_name || user.email}`;
+                } else {
+                    document.getElementById('authButtons').classList.remove('hidden');
+                    document.getElementById('userMenu').classList.add('hidden');
+                }
+            } catch(e) {
+                console.log(e);
             }
         }
 
-        // Check auth status on load
         checkUser();
     </script>
 </body>
